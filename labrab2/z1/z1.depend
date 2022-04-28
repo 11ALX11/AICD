@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1651134124 source:c:\users\11alx11\documents\aicd\labrab2\z1\main.cpp
+	<iostream>
+	<ctime>
+	<windows.h>
+
