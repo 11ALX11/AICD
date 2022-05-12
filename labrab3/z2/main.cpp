@@ -1,41 +1,42 @@
 #include <iostream>
-#include <list>
+#include <queue>
 
 using namespace std;
 
 int main()
 {
-    //We have 2 lists with elements (we shall define elements as int)
-    list<int> list1;
-    list<int> list2;
-    list<int> listOut;
-    
+    //We have 2 queues with elements (we shall define elements as int)
+    queue<int> queue1;
+    queue<int> queue2;
+    queue<int> queueOut;
+
     for (int i=0; i<20; i++) {
         if (i<10) {
             //0 1 2 3...
-            list1.push_back(i);
+            queue1.push(i);
         }
         else {
             //10 11 12 13...
-            list2.push_back(i);
+            queue2.push(i);
         }
     }
-    
+
     for (int i=0; i<20; i++) {
         if (!(i%2)) {
-            listOut.push_back(list1.front());
-            list1.pop_front();
+            queueOut.push(queue1.front());
+            queue1.pop();
         }
         else {
-            listOut.push_back(list2.front());
-            list2.pop_front();
+            queueOut.push(queue2.front());
+            queue2.pop();
         }
     }
-    
-    for (auto elem : listOut) {
-        cout << (elem) << " ";
+
+    for (int i=0; i<20; i++) {
+        cout << queueOut.front() << " ";
+        queueOut.pop();
     }
     cout << endl;
-    
+
     return 0;
 }
