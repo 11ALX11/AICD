@@ -32,6 +32,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="bstree.cpp" />
+		<Unit filename="bstree.h" />
+		<Unit filename="hashtab.cpp" />
+		<Unit filename="hashtab.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -2,13 +2,15 @@
 #include "bstree.h"
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 200000
-
 using namespace std;
 
 int main()
 {
-    struct listnode* hashtab = new struct listnode[HASHTAB_SIZE];
+    for (int i=1; i<=20; i++) {
+        struct bstree* bstree = new struct bstree[i*10000];
+        struct listnode* hashtab = new struct listnode[i*10000];
+
+    }
 
     cout << "Hello world!" << endl;
     return 0;
