@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <ctime>
 #include "bstree.h"
 #include "hashtab.h"
 
@@ -8,7 +9,7 @@ using namespace std;
 
 int main()
 {
-    for (int i=1; i<=1; i++) {
+    for (int i=1; i<=20; i++) {
         struct bstree* bstree;
         struct listnode* hashtab[HASHTAB_SIZE];
 
@@ -30,16 +31,18 @@ int main()
             }
         }
         
-        char* key = "password";
-        struct bstree* treenode = bstree_lookup(bstree, key);
-        struct listnode* listnode = hashtab_lookup(hashtab, key);
+        char* key = "wayne99";
         
-        if (treenode != NULL) {
-            cout << treenode->key << endl;
-        }
-        if (listnode != NULL) {
-            cout << listnode->key << " 1" << endl;
-        }
+        unsigned int timer_tree = clock();
+        struct bstree* treenode = bstree_lookup(bstree, key);
+        timer_tree = clock()-timer_tree;
+        
+        unsigned int timer_hashtab = clock();
+        struct listnode* listnode = hashtab_lookup(hashtab, key);
+        timer_hashtab = clock()-timer_hashtab;
+        
+        cout << i*10000 << " " << timer_tree << " ";
+        cout << timer_hashtab << endl;
     }
 
     return 0;
