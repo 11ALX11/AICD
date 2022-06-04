@@ -5,7 +5,7 @@
 #include <string.h>
 
 struct bstree {
-    char* key;
+    char key[32];
     int value;
     struct bstree *left;
     struct bstree *right;
