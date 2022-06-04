@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1652340714 source:c:\users\11alx11\documents\aicd\labrab4\bstree.cpp
+	"bstree.h"
+
+1652341401 c:\users\11alx11\documents\aicd\labrab4\bstree.h
+	<stdlib.h>
+	<string.h>
+
+1652340978 source:c:\users\11alx11\documents\aicd\labrab4\main.cpp
+	<iostream>
+	"bstree.h"
+	"hashtab.h"
+
+1652343139 c:\users\11alx11\documents\aicd\labrab4\hashtab.h
+	<stdlib.h>
+	<string.h>
+
+1652343038 source:c:\users\11alx11\documents\aicd\labrab4\hashtab.cpp
+	"hashtab.h"
+
