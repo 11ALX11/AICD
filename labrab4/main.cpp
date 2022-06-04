@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <ctime>
+#include <windows.h>
 #include "bstree.h"
 #include "hashtab.h"
 
@@ -16,11 +17,14 @@ int main()
         fstream dictionary;
         dictionary.open("dictionary.txt", ios::in);
 
+        char key[32];
+        int random = rand()%(i*10000);
+
         for (int j = 1; j <= i*10000; j++) {
             string in;
             getline(dictionary, in);
             char* input = &in[0];
-            
+
             if (j == 1) {
                 bstree = bstree_create(input, 0);
                 hashtab_init(hashtab);
@@ -29,20 +33,23 @@ int main()
                 bstree_add(bstree, input, j);
                 hashtab_add(hashtab, input, j);
             }
+
+            if (j == random) {
+                strcpy(key, input);
+            }
         }
-        
-        char* key = "wayne99";
-        
+
+        dictionary.close();
+
         unsigned int timer_tree = clock();
         struct bstree* treenode = bstree_lookup(bstree, key);
         timer_tree = clock()-timer_tree;
-        
+
         unsigned int timer_hashtab = clock();
         struct listnode* listnode = hashtab_lookup(hashtab, key);
         timer_hashtab = clock()-timer_hashtab;
-        
-        cout << i*10000 << " " << timer_tree << " ";
-        cout << timer_hashtab << endl;
+
+        cout << i*10000 << " " << timer_tree << " " << timer_hashtab << endl;
     }
 
     return 0;
