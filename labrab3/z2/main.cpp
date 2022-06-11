@@ -1,40 +1,40 @@
 #include <iostream>
-#include <queue>
+#include "queue.h"
 
 using namespace std;
 
 int main()
 {
     //We have 2 queues with elements (we shall define elements as int)
-    queue<int> queue1;
-    queue<int> queue2;
-    queue<int> queueOut;
+    struct node* queue1 = nullptr;
+    struct node* queue2 = nullptr;
+    struct node* queueOut = nullptr;
 
     for (int i=0; i<20; i++) {
         if (i<10) {
             //0 1 2 3...
-            queue1.push(i);
+            push(&queue1, i);
         }
         else {
             //10 11 12 13...
-            queue2.push(i);
+            push(&queue2, i);
         }
     }
 
     for (int i=0; i<20; i++) {
         if (!(i%2)) {
-            queueOut.push(queue1.front());
-            queue1.pop();
+            push(&queueOut, front(queue1));
+            pop(&queue1);
         }
         else {
-            queueOut.push(queue2.front());
-            queue2.pop();
+            push(&queueOut, front(queue2));
+            pop(&queue2);
         }
     }
 
     for (int i=0; i<20; i++) {
-        cout << queueOut.front() << " ";
-        queueOut.pop();
+        cout << front(queueOut) << " ";
+        pop(&queueOut);
     }
     cout << endl;
 

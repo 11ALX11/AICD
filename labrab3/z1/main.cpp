@@ -1,5 +1,5 @@
 #include <iostream>
-#include <stack>
+#include "stack.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ int main()
 }
 
 bool checkHTML() {
-    stack<string> tags;
+    struct node* tags = NULL; //stack
     
     bool result = true;
     cout << "Enter HTML code (to exit input mode, type 'e!'):\n";
@@ -61,12 +61,12 @@ bool checkHTML() {
                 if (!isalpha(tmp) && !isdigit(tmp)) {
                     if (!isClosingTag) {
                         //push into stack if opening tag
-                        tags.push(tag);
+                        push(&tags, tag);
                     }
                     else {
-                        if (!tags.empty() && tags.top() == tag) {
+                        if (!isStackEmpty(tags) && top(tags) == tag) {
                             //pop from stack if pair matches
-                            tags.pop();
+                            pop(&tags);
                         }
                         else {
                             result = false;
@@ -92,7 +92,7 @@ bool checkHTML() {
         cin >> noskipws >> tmp;
     }
     
-    if (result && tags.empty()) {
+    if (result && isStackEmpty(tags)) {
         return true;
     }
     return false;

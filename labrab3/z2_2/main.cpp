@@ -1,57 +1,57 @@
 #include <iostream>
-#include <queue>
+#include "queue.h"
 
 using namespace std;
 
 int main()
 {
     //We have 2 queues with elements (we shall define elements as int)
-    queue<int> queue1;
-    queue<int> queue2;
-    queue<int> queueOut;
+    struct node* queue1 = nullptr;
+    struct node* queue2 = nullptr;
+    struct node* queueOut = nullptr;
 
     for (int i=0; i<20; i++) {
         if (!(i%3)) {
             //0 3 6 9 12 15 18
-            queue1.push(i);
+            push(&queue1, i);
         }
         else {
             //1 2 4 5 7 8 10 11 13 14 16 17 19
-            queue2.push(i);
+            push(&queue2, i);
         }
     }
 
     int minimum;
-    while (!queue1.empty() || !queue2.empty()) {
-        if (queue1.front() < queue2.front()) {
-            minimum = queue1.front();
-            queue1.pop();
+    while (!empty(queue1) || !empty(queue2)) {
+        if (front(queue1) < front(queue2)) {
+            minimum = front(queue1);
+            pop(&queue1);
         }
         else {
-            minimum = queue2.front();
-            queue2.pop();
+            minimum = front(queue2);
+            pop(&queue2);
         }
 
-        queueOut.push(minimum);
+        push(&queueOut, minimum);
 
-        if (queue1.empty()) {
-            while (!queue2.empty()) {
-                queueOut.push(queue2.front());
-                queue2.pop();
+        if (empty(queue1)) {
+            while (!empty(queue2)) {
+                push(&queueOut, front(queue2));
+                pop(&queue2);
             }
         }
-        if (queue2.empty()) {
-            while (!queue1.empty()) {
-                queueOut.push(queue1.front());
-                queue1.pop();
+        if (empty(queue2)) {
+            while (!empty(queue1)) {
+                push(&queueOut, front(queue1));
+                pop(&queue1);
             }
         }
     }
 
     //0 1 2 3 4 5...
     for (int i=0; i<20; i++) {
-        cout << queueOut.front() << " ";
-        queueOut.pop();
+        cout << front(queueOut) << " ";
+        pop(&queueOut);
     }
     cout << endl;
 
