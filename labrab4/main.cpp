@@ -34,12 +34,14 @@ int main()
                 hashtab_add(hashtab, input, j);
             }
 
-            if (j == random) {
+            if (j == i*10000) {
                 strcpy(key, input);
             }
         }
 
         dictionary.close();
+        
+        int tmp = 0;
 
         unsigned int timer_tree = clock();
         struct bstree* treenode = bstree_lookup(bstree, key);
