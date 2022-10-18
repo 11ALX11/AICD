@@ -2,7 +2,8 @@
 #include <fstream>
 #include <string>
 #include <ctime>
-#include <windows.h>
+#include <chrono>
+//#include <windows.h>
 #include "bstree.h"
 #include "hashtab.h"
 
@@ -40,18 +41,26 @@ int main()
         }
 
         dictionary.close();
-        
+
         int tmp = 0;
 
-        unsigned int timer_tree = clock();
+        std::chrono::time_point<std::chrono::system_clock> start, finish;
+
+        start = chrono::system_clock::now();
+        //start
         struct bstree* treenode = bstree_lookup(bstree, key);
-        timer_tree = clock()-timer_tree;
+        //finish
+        finish = chrono::system_clock::now();
+        std::chrono::duration<double> timer_tree = finish - start;
 
-        unsigned int timer_hashtab = clock();
+        start = chrono::system_clock::now();
+        //start
         struct listnode* listnode = hashtab_lookup(hashtab, key);
-        timer_hashtab = clock()-timer_hashtab;
+        //finish
+        finish = chrono::system_clock::now();
+        std::chrono::duration<double> timer_hashtab = finish - start;
 
-        cout << i*10000 << " " << timer_tree << " " << timer_hashtab << endl;
+        cout << i*10000 << " " << timer_tree.count() << " " << timer_hashtab.count() << endl;
     }
 
     return 0;
