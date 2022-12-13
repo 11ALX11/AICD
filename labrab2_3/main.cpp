@@ -3,6 +3,7 @@
 using namespace std;
 
 vector<pair<int, int>> graph[100000];
+vector<pair<int, pair<int, int>>> edges;
 int INF;
 
 void print_graf(int m);
@@ -24,8 +25,10 @@ int main() {
         infile >> u >> v >> w;
         u--, v--; //исправляем нумерацию с 1-ы
 
-        //graph[u].push_back({v, w});
-        //graph[v].push_back({u, w});
+        graph[u].push_back({v, w});
+        graph[v].push_back({u, w});
+
+        edges.push_back({w, {v, u}});
 
         INF+=w;
     }
@@ -52,10 +55,12 @@ void print_graf(int m) {
     }
 }
 
-bool cmp(auto a, auto b) {
-    return a.second < b.second;
-}
-
 void kruskal(int n, int m) {
-    //  sort(graph.begin(), graph.end(), cmp);
+    sort(edges.begin(), edges.end(), [](pair<int, pair<int, int>> a, pair<int, pair<int, int>> b) {
+        return a.first < b.first;
+    });
+
+    for (pair<int, pair<int, int>> edge: edges) {
+        //...
+    }
 }
