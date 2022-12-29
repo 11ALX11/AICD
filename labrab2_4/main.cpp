@@ -35,12 +35,12 @@ public:
     {
         if (!root) return;
 
-        if (root->symbol)
+        /*if (root->symbol)
         {
             for (int i = 0; i < depth; i++)
                 cout << ".";
             cout << root->symbol << endl;
-        }
+        }*/
         else depth++;
         Print(root->left, depth);
         Print(root->right, depth);
@@ -91,18 +91,20 @@ string Decode(string &str, map<vector<bool>, char> &table)
 int main()
 {
     int a=0, c;
-    string raw;
+    string raw, line;
 
     fstream infile; //a.k.a. input file
     infile.open("text.txt", ios::in);
 
     map<char, int> symbols;
-    //while (infile) {
-        getline(infile,raw);
+    while (infile) {
+        getline(infile, line);
+        raw += line;
+        raw += "\n";
+    }
+    for (int i = 0; i < raw.length(); i++)
+        symbols[raw[i]]++;
 
-        for (int i = 0; i < raw.length(); i++)
-            symbols[raw[i]]++;
-    //}
 
     list<Node*> trees;
     map<char, int>::iterator itr;
@@ -113,7 +115,6 @@ int main()
     }
     if (trees.size() == 0) {
         cout << "String is empty" << endl;
-        system("pause");
         return 0;
     }
     else
@@ -122,9 +123,8 @@ int main()
         {
             Node *root = trees.front();
             root->Print(root);
-            cout << " - "<< a << endl;
-            cout << a << endl;
-            system("pause");
+            //cout << " - "<< a << endl;
+            //cout << a << endl;
         }
         else
         {
@@ -150,13 +150,16 @@ int main()
             BuildTable(root, code, table);
 
 
-            for (itr = symbols.begin(); itr != symbols.end(); itr++)
+            /*for (itr = symbols.begin(); itr != symbols.end(); itr++)
             {
                 cout << itr->first << " - ";
                 for (int j = 0; j < table[itr->first].size(); j++)
                     cout << table[itr->first][j];
                 cout << endl;
-            }
+            }*/
+
+            fstream binfile;
+            binfile.open("text.bin", ios::out | ios::binary);
 
             string out = "";
 
@@ -167,7 +170,7 @@ int main()
                     cout << table[raw[i]][j];
                 }
             cout << endl;
-            cout << out.c_str() << endl;
+            binfile << out.c_str() << endl;
 
 
 
